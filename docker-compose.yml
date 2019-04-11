@@ -1,0 +1,41 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:10.7
+    build: ./docker/postgres
+    restart: always
+    environment:
+      POSTGRES_USER: psqluser
+      POSTGRES_PASSWORD: psqlpassword
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    hostname: postgres
+    container_name: db
+    tty: true
+    ports:
+      - 5432:5432
+    volumes:
+      # エントリーポイント
+      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - local-net
+
+  # FastAPI
+  api:
+    # db起動後に立ち上げる
+    links:
+      - db
+    container_name: "api"
+    # path配下のDockerfile読み込み
+    build: ./docker/api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./code:/usr/src/server
+    networks:
+      - local-net
+
+# コンテナ間で通信を行うためのネットワークブリッジ
+networks:
+  local-net:
+    driver: bridge
