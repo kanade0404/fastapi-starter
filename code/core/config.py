@@ -1,0 +1,8 @@
+import os
+
+API_V1_STR = '/api/v1'
+MYSQL_USER_NAME = os.getenv('MYSQL_USER')
+MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
+MYSQL_DB_NAME = os.getenv('MYSQL_DATABASE')
+MYSQL_ROOT_PASSWORD = os.getenv('MYSQL_ROOT_PASSWORD')
+HOST_NAME = os.getenv('HOST_NAME')

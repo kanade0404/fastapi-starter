@@ -1,22 +1,25 @@
 version: "3.3"
 
 services:
+  # MySQL
   db:
-    image: postgres:10.7
-    build: ./docker/postgres
+    container_name: ${HOST_NAME}
+    # path配下のDockerfile読み込み
+    build: ./docker/mysql
+    # コンテナが落ちたら再起動する
     restart: always
-    environment:
-      POSTGRES_USER: psqluser
-      POSTGRES_PASSWORD: psqlpassword
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    hostname: postgres
-    container_name: db
     tty: true
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} # ユーザのパスワード
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # ルートパスワード
     ports:
-      - 5432:5432
+      - "3306:3306"
     volumes:
-      # エントリーポイント
-      - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d # 定義どおりにテーブル作成
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d # MySQLの基本設定(文字化け対策)
+      - ./log/mysql:/var/log/mysql # ログの保存
     networks:
       - local-net
 

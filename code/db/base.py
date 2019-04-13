@@ -3,19 +3,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
+from code.core import config
 
-
-# 接続したいDBの基本情報を設定
-user_name = "user"
-password = "password"
-host = "db"  # docker-composeで定義したMySQLのサービス名
-database_name = "sample_db"
 
 DATABASE = 'mysql://%s:%s@%s/%s?charset=utf8' % (
-    user_name,
-    password,
-    host,
-    database_name,
+    config.MYSQL_USER_NAME,
+    config.MYSQL_PASSWORD,
+    config.HOST_NAME,  # docker-composeで定義したMySQLのサービス名
+    config.MYSQL_DB_NAME,
 )
 
 # DBとの接続
