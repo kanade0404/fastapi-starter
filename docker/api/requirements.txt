@@ -2,3 +2,7 @@ mysqlclient
 sqlalchemy
 uvicorn
 fastapi
+starlette == 0.11.1
+passlib
+pydantic == 0.21.0
+pyjwt

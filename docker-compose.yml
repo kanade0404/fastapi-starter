@@ -34,7 +34,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./code:/usr/src/server
+      - ./app:/usr/src/server
     networks:
       - local-net
 

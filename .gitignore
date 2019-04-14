@@ -141,6 +141,7 @@ venv.bak/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/Project_Default.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/

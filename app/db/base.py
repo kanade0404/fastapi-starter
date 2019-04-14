@@ -3,7 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from code.core import config
+from ..core import config
 
 
 DATABASE = 'mysql://%s:%s@%s/%s?charset=utf8' % (
